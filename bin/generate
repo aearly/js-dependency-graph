@@ -3,10 +3,18 @@
 var
   fs = require("fs"),
   path = require("path"),
+  _ = require("lodash"),
   program = require("commander"),
   glob = require("glob"),
   walker = require(".."),
   options = {};
+
+function prettyPrint(obj) {
+  var sep = "\n  |- ";
+  return obj.name + " " + obj.includes +
+    (obj.untracked ? "*" : "") +
+    _.map(obj.classes, function (cls) {return sep + cls; }).join("");
+}
 
 program
   .version(JSON.parse(fs.readFileSync(path.normalize(__dirname + "/../package.json"))).version)
@@ -29,5 +37,5 @@ walker.run(options, function (err, report) {
   if (err) {
     return console.error(err.message);
   }
-  console.log(report.join("\n"));
+  console.log(_.map(report, prettyPrint).join("\n\n"));
 });
