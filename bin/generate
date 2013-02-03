@@ -1,0 +1,33 @@
+#!/usr/bin/env node
+
+var
+  fs = require("fs"),
+  path = require("path"),
+  program = require("commander"),
+  glob = require("glob"),
+  walker = require(".."),
+  options = {};
+
+program
+  .version(JSON.parse(fs.readFileSync(path.normalize(__dirname + "/../package.json"))).version)
+  .option("-b, --baseDir [dir]", "Dir from which to glob match.  Defaults to PWD.")
+  .option("--glob, g [pattern]", "Source file pattern to match.  Deafults to **/*.js")
+  .parse(process.argv);
+
+options.baseDir = program.baseDir || ".";
+options.glob = program.glob || "**/*.js";
+
+if (options.baseDir.indexOf("/") !== 0) {
+  options.baseDir = path.normalize(process.cwd() + path.sep + options.baseDir);
+}
+
+options.files = glob.sync(options.glob, {
+  cwd: options.baseDir
+});
+
+walker.run(options, function (err, report) {
+  if (err) {
+    return console.error(err.message);
+  }
+  console.log(JSON.stringify(report));
+});

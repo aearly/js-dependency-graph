@@ -1,0 +1,19 @@
+{
+  "name": "dependency-graph",
+  "version": "0.0.0",
+  "description": "\"Generate a dependency map from a naïve module system\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": "",
+  "author": "Alexander Early <alexander.early@gmail.com>",
+  "license": "BSD",
+  "dependencies": {
+    "esprima": "~1.0.2",
+    "commander": "~1.1.1",
+    "glob": "~3.1.17",
+    "async": "~0.1.22",
+    "lodash": "~1.0.0-rc.3"
+  }
+}
