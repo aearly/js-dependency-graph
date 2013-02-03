@@ -29,5 +29,5 @@ walker.run(options, function (err, report) {
   if (err) {
     return console.error(err.message);
   }
-  console.log(JSON.stringify(report));
+  console.log(report.join("\n"));
 });
