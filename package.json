@@ -1,12 +1,12 @@
 {
-  "name": "dependency-graph",
+  "name": "js-dependency-graph",
   "version": "0.0.0",
   "description": "\"Generate a dependency map from a naïve module system\"",
   "main": "index.js",
   "scripts": {
     "test": "mocha"
   },
-  "repository": "",
+  "repository": "https://github.com/aearly/js-dependency-graph",
   "author": "Alexander Early <alexander.early@gmail.com>",
   "license": "BSD",
   "dependencies": {

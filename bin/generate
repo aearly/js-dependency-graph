@@ -20,6 +20,7 @@ program
   .version(JSON.parse(fs.readFileSync(path.normalize(__dirname + "/../package.json"))).version)
   .option("-b, --baseDir [dir]", "Dir from which to glob match.  Defaults to PWD.")
   .option("--glob, g [pattern]", "Source file pattern to match.  Deafults to **/*.js")
+  .option("-j --json", "Output json instead of the report.  Defualts to false")
   .parse(process.argv);
 
 options.baseDir = program.baseDir || ".";
@@ -37,5 +38,9 @@ walker.run(options, function (err, report) {
   if (err) {
     return console.error(err.message);
   }
-  console.log(_.map(report, prettyPrint).join("\n\n"));
+  if (program.json) {
+    console.log(JSON.stringify(report, null, "  "));
+  } else {
+    console.log(_.map(report, prettyPrint).join("\n\n"));
+  }
 });
